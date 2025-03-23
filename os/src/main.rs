@@ -28,7 +28,7 @@ global_asm!(include_str!("entry.asm"));
 
 /// clear BSS segment
 pub fn clear_bss() {
-    extern "C" {
+    unsafe extern "C" {
         fn sbss();
         fn ebss();
     }
@@ -36,9 +36,9 @@ pub fn clear_bss() {
 }
 
 /// the rust entry-point of os
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub fn rust_main() -> ! {
-    extern "C" {
+    unsafe extern "C" {
         fn stext(); // begin addr of text segment
         fn etext(); // end addr of text segment
         fn srodata(); // start addr of Read-Only data segment
