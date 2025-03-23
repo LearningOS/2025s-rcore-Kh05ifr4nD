@@ -17,15 +17,12 @@
 
 #![deny(missing_docs)]
 #![deny(warnings)]
-#![no_std]
-#![no_main]
-#![feature(panic_info_message)]
 #![feature(alloc_error_handler)]
+#![no_main]
+#![no_std]
 
 #[macro_use]
 extern crate log;
-
-extern crate alloc;
 
 #[macro_use]
 mod console;

@@ -62,7 +62,7 @@ pub fn get_num_app() -> usize {
 }
 
 /// Load nth user app at
-/// [APP_BASE_ADDRESS + n * APP_SIZE_LIMIT, APP_BASE_ADDRESS + (n+1) * APP_SIZE_LIMIT).
+/// [`APP_BASE_ADDRESS` + n `APP_SIZE_LIMIT``APP_BASE_ADDRESS`RESS + (n`APP_SIZE_LIMIT`_LIMIT).
 pub fn load_apps() {
     extern "C" {
         fn _num_app();

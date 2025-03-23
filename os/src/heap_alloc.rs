@@ -7,12 +7,13 @@ use buddy_system_allocator::LockedHeap;
 /// heap allocator instance
 static HEAP_ALLOCATOR: LockedHeap = LockedHeap::empty();
 
-/// heap space ([u8; KERNEL_HEAP_SIZE])
+/// heap space ([u8; `KERNEL_HEAP_SIZE`])
 static mut HEAP_SPACE: [u8; KERNEL_HEAP_SIZE] = [0; KERNEL_HEAP_SIZE];
 
 /// initiate heap allocator
 pub fn init_heap() {
     unsafe {
+        #[allow(static_mut_refs)]
         HEAP_ALLOCATOR
             .lock()
             .init(HEAP_SPACE.as_ptr() as usize, KERNEL_HEAP_SIZE);
