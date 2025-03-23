@@ -66,7 +66,7 @@ impl AppManager {
         }
     }
 
-    unsafe fn load_app(&self, app_id: usize) {
+    unsafe fn load_app(&self, app_id: usize) { unsafe {
         if app_id >= self.num_app {
             println!("All applications completed!");
             use crate::board::QEMUExit;
@@ -88,7 +88,7 @@ impl AppManager {
         // the code of the next app into the instruction memory.
         // See also: riscv non-priv spec chapter 3, 'Zifencei' extension.
         asm!("fence.i");
-    }
+    }}
 
     pub fn get_current_app(&self) -> usize {
         self.current_app
@@ -102,7 +102,7 @@ impl AppManager {
 lazy_static! {
     static ref APP_MANAGER: UPSafeCell<AppManager> = unsafe {
         UPSafeCell::new({
-            extern "C" {
+            unsafe extern "C" {
                 fn _num_app();
             }
             let num_app_ptr = _num_app as usize as *const usize;
@@ -141,7 +141,7 @@ pub fn run_next_app() -> ! {
     drop(app_manager);
     // before this we have to drop local variables related to resources manually
     // and release the resources
-    extern "C" {
+    unsafe extern "C" {
         fn __restore(cx_addr: usize);
     }
     unsafe {

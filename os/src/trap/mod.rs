@@ -27,7 +27,7 @@ global_asm!(include_str!("trap.S"));
 
 /// initialize CSR `stvec` as the entry of `__alltraps`
 pub fn init() {
-    extern "C" {
+    unsafe extern "C" {
         fn __alltraps();
     }
     unsafe {
@@ -35,7 +35,7 @@ pub fn init() {
     }
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 /// handle an interrupt, exception, or system call from user space
 pub fn trap_handler(cx: &mut TrapContext) -> &mut TrapContext {
     let scause = scause::read(); // get trap cause
@@ -45,7 +45,7 @@ pub fn trap_handler(cx: &mut TrapContext) -> &mut TrapContext {
             cx.sepc += 4;
             cx.x[10] = syscall(cx.x[17], [cx.x[10], cx.x[11], cx.x[12]]) as usize;
         }
-        Trap::Exception(Exception::StoreFault) | Trap::Exception(Exception::StorePageFault) => {
+        Trap::Exception(Exception::StoreFault | Exception::StorePageFault) => {
             println!("[kernel] PageFault in application, kernel killed it.");
             run_next_app();
         }

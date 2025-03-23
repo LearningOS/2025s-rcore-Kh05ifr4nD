@@ -11,7 +11,7 @@ pub struct TrapContext {
 }
 
 impl TrapContext {
-    /// set stack pointer to x_2 reg (sp)
+    /// set stack pointer to `x_2` reg (sp)
     pub fn set_sp(&mut self, sp: usize) {
         self.x[2] = sp;
     }

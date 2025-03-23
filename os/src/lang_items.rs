@@ -5,16 +5,16 @@ use core::panic::PanicInfo;
 
 #[panic_handler]
 /// panic handler
-fn panic(info: &PanicInfo) -> ! {
+fn panic(info: &PanicInfo<'_>) -> ! {
     if let Some(location) = info.location() {
         println!(
             "[kernel] Panicked at {}:{} {}",
             location.file(),
             location.line(),
-            info.message().unwrap()
+            info.message()
         );
     } else {
-        println!("[kernel] Panicked: {}", info.message().unwrap());
+        println!("[kernel] Panicked: {}", info.message());
     }
     shutdown()
 }
