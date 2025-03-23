@@ -17,3 +17,5 @@ pub const APP_SIZE_LIMIT: usize = 0x20000;
 pub const CLOCK_FREQ: usize = 12500000;
 /// the physical memory end
 pub const MEMORY_END: usize = 0x88000000;
+/// the total number of system calls
+pub const SYSCALL_NUM: usize = <crate::syscall::Syscall as strum::EnumCount>::COUNT;

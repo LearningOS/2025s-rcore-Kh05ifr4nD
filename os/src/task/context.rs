@@ -3,7 +3,7 @@
 #[derive(Copy, Clone)]
 #[repr(C)]
 /// task context structure containing some registers
-pub struct TaskContext {
+pub struct TaskCtx {
     /// Ret position after task switching
     ra: usize,
     /// Stack pointer
@@ -12,7 +12,7 @@ pub struct TaskContext {
     s: [usize; 12],
 }
 
-impl TaskContext {
+impl TaskCtx {
     /// Create a new empty task context
     pub fn zero_init() -> Self {
         Self {

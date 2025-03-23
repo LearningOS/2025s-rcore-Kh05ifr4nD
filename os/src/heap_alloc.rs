@@ -4,8 +4,8 @@ use crate::config::KERNEL_HEAP_SIZE;
 use buddy_system_allocator::LockedHeap;
 
 #[global_allocator]
-/// heap allocator instance
-static HEAP_ALLOCATOR: LockedHeap = LockedHeap::empty();
+/// The max order of the buddy system is `ORDER - 1` (with a maximum block size of `2^{ORDER - 1}` bytes)
+static HEAP_ALLOCATOR: LockedHeap<33> = LockedHeap::empty();
 
 /// heap space ([u8; `KERNEL_HEAP_SIZE`])
 static mut HEAP_SPACE: [u8; KERNEL_HEAP_SIZE] = [0; KERNEL_HEAP_SIZE];
