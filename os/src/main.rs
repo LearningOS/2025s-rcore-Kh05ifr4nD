@@ -9,8 +9,8 @@
 
 #![deny(missing_docs)]
 #![deny(warnings)]
-#![no_std]
 #![no_main]
+#![no_std]
 
 use core::arch::global_asm;
 use log::*;

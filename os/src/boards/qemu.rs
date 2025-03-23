@@ -24,11 +24,11 @@ pub trait QEMUExit {
 
 /// RISCV64 configuration
 pub struct RISCV64 {
-    /// Address of the sifive_test mapped device.
+    /// Address of the `sifive_test` mapped device.
     addr: u64,
 }
 
-/// Encode the exit code using EXIT_FAILURE_FLAG.
+/// Encode the exit code using `EXIT_FAILURE_FLAG`.
 const fn exit_code_encode(code: u32) -> u32 {
     (code << 16) | EXIT_FAILURE_FLAG
 }

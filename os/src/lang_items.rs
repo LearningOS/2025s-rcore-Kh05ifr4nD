@@ -5,7 +5,7 @@ use core::panic::PanicInfo;
 
 #[panic_handler]
 /// panic handler
-fn panic(info: &PanicInfo) -> ! {
+fn panic(info: &PanicInfo<'_>) -> ! {
     if let Some(location) = info.location() {
         println!(
             "[kernel] Panicked at {}:{} {}",
