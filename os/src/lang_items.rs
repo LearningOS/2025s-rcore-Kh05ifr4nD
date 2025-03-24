@@ -8,13 +8,13 @@ use core::panic::PanicInfo;
 fn panic(info: &PanicInfo<'_>) -> ! {
     if let Some(location) = info.location() {
         println!(
-            "[kernel] Panicked at {}:{} {}",
+            "[kernel] Panicked at {}:{} {:?}",
             location.file(),
             location.line(),
             info.message()
         );
     } else {
-        println!("[kernel] Panicked: {}", info.message());
+        println!("[kernel] Panicked: {:?}", info.message());
     }
     shutdown()
 }

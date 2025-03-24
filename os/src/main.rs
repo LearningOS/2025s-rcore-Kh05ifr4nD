@@ -18,6 +18,7 @@
 #![deny(missing_docs)]
 #![deny(warnings)]
 #![feature(alloc_error_handler)]
+#![feature(panic_info_message)]
 #![no_main]
 #![no_std]
 
